@@ -45,11 +45,11 @@ export default function Home() {
     lyricMutation.reset();
   };
 
-  // Calculate visibility based on scroll position
-  const squareVisibility = Math.min(1, Math.max(0, scrollY / 300));
-  const triangleVisibility = Math.min(1, Math.max(0, (scrollY - 200) / 300));
-  const circleVisibility = Math.min(1, Math.max(0, (scrollY - 400) / 300));
-  const xVisibility = Math.min(1, Math.max(0, (scrollY - 600) / 300));
+  // Calculate visibility based on scroll position - linear vertical reveal
+  const squareVisibility = Math.min(1, Math.max(0, scrollY / 200));
+  const triangleVisibility = Math.min(1, Math.max(0, (scrollY - 250) / 200));
+  const circleVisibility = Math.min(1, Math.max(0, (scrollY - 500) / 200));
+  const xVisibility = Math.min(1, Math.max(0, (scrollY - 750) / 200));
   
   // Calculate parallax movement for shapes
   const squareParallax = scrollY * 0.3;
@@ -73,9 +73,9 @@ export default function Home() {
         }}
       />
       
-      {/* Scrollytelling Shapes */}
+      {/* Scrollytelling Shapes in a vertical line */}
       {/* Square */}
-      <div className="fixed left-[20%] z-10 flex flex-col items-center">
+      <div className="fixed left-1/2 top-[20%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div 
           className="w-24 h-24 rounded-sm relative" 
           style={{
@@ -86,25 +86,10 @@ export default function Home() {
             border: '3px solid #d946ef',
           }}
         />
-        <p 
-          className="mt-2 text-center font-bold text-white text-shadow px-4 py-2 bg-black/50 rounded-lg backdrop-blur-sm max-w-xs"
-          style={{
-            opacity: squareVisibility,
-            transform: `translateY(${squareParallax * 0.2}px)`,
-          }}
-        >
-          Section.80 <span className="block text-sm font-normal mt-1">2011 - The debut that started it all</span>
-        </p>
-        <div
-          style={{
-            opacity: squareVisibility,
-            top: `calc(20% - ${squareParallax}px)`,
-          }}
-        />
       </div>
       
       {/* Triangle */}
-      <div className="fixed right-[25%] z-10 flex flex-col items-center">
+      <div className="fixed left-1/2 top-[35%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div
           style={{
             opacity: triangleVisibility,
@@ -118,25 +103,10 @@ export default function Home() {
             border: '3px solid #2563eb',
           }}
         />
-        <p 
-          className="mt-2 text-center font-bold text-white text-shadow px-4 py-2 bg-black/50 rounded-lg backdrop-blur-sm max-w-xs"
-          style={{
-            opacity: triangleVisibility,
-            transform: `translateY(${triangleParallax * 0.2}px)`,
-          }}
-        >
-          good kid, m.A.A.d city <span className="block text-sm font-normal mt-1">2012 - The cinematic masterpiece</span>
-        </p>
-        <div
-          style={{
-            opacity: triangleVisibility,
-            top: `calc(35% - ${triangleParallax}px)`,
-          }}
-        />
       </div>
       
       {/* Circle */}
-      <div className="fixed left-[30%] z-10 flex flex-col items-center">
+      <div className="fixed left-1/2 top-[50%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div
           className="w-28 h-28 rounded-full"
           style={{
@@ -147,25 +117,10 @@ export default function Home() {
             border: '3px solid #06b6d4',
           }}
         />
-        <p 
-          className="mt-2 text-center font-bold text-white text-shadow px-4 py-2 bg-black/50 rounded-lg backdrop-blur-sm max-w-xs"
-          style={{
-            opacity: circleVisibility,
-            transform: `translateY(${circleParallax * 0.2}px)`,
-          }}
-        >
-          To Pimp a Butterfly <span className="block text-sm font-normal mt-1">2015 - The revolutionary jazz-inspired opus</span>
-        </p>
-        <div
-          style={{
-            opacity: circleVisibility,
-            top: `calc(50% - ${circleParallax}px)`,
-          }}
-        />
       </div>
       
       {/* X Shape */}
-      <div className="fixed right-[35%] z-10 flex flex-col items-center">
+      <div className="fixed left-1/2 top-[65%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div
           style={{
             opacity: xVisibility,
@@ -199,21 +154,6 @@ export default function Home() {
             }}
           />
         </div>
-        <p 
-          className="mt-2 text-center font-bold text-white text-shadow px-4 py-2 bg-black/50 rounded-lg backdrop-blur-sm max-w-xs"
-          style={{
-            opacity: xVisibility,
-            transform: `translateY(${xParallax * 0.2}px)`,
-          }}
-        >
-          DAMN. <span className="block text-sm font-normal mt-1">2017 - The Pulitzer Prize-winning classic</span>
-        </p>
-        <div
-          style={{
-            opacity: xVisibility,
-            top: `calc(65% - ${xParallax}px)`,
-          }}
-        />
       </div>
       
       {/* Content with glass-like container - positioned at bottom after scrolling */}
@@ -228,10 +168,10 @@ export default function Home() {
           }}
         >
           <h2 className="text-2xl md:text-3xl font-bold text-indigo-700 mb-4">
-            You've traveled through Kendrick's discography!
+            Welcome to Kendrick Decoder
           </h2>
           <p className="text-gray-700 mb-8">
-            Now use the decoder below to analyze the deeper meanings in his lyrics
+            Use the tool below to analyze the deeper meanings in his lyrics
           </p>
           <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-indigo-700 mx-auto rounded-full"/>
         </div>
