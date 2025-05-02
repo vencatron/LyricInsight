@@ -77,15 +77,32 @@ export default function Home() {
       {/* Square */}
       <div className="fixed left-1/2 top-[20%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div 
-          className="w-24 h-24 rounded-sm relative" 
           style={{
             opacity: squareVisibility,
             transform: `rotate(${scrollY * 0.1}deg)`,
             transition: 'opacity 0.5s ease, transform 0.3s ease',
-            boxShadow: '0 0 15px #d946ef, 0 0 30px #d946ef',
-            border: '3px solid #d946ef',
+            width: '80px',
+            height: '80px',
+            position: 'relative',
           }}
-        />
+        >
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <defs>
+              <filter id="purpleGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComposite in="SourceGraphic" operator="over" />
+              </filter>
+            </defs>
+            <rect 
+              x="5" y="5" 
+              width="70" height="70" 
+              fill="transparent" 
+              stroke="#d946ef" 
+              strokeWidth="3" 
+              filter="url(#purpleGlow)" 
+            />
+          </svg>
+        </div>
       </div>
       
       {/* Triangle */}
@@ -98,25 +115,55 @@ export default function Home() {
             width: '90px',
             height: '90px',
             position: 'relative',
-            clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
-            boxShadow: '0 0 15px #2563eb, 0 0 30px #2563eb',
-            border: '3px solid #2563eb',
           }}
-        />
+        >
+          <svg width="90" height="90" viewBox="0 0 90 90">
+            <defs>
+              <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComposite in="SourceGraphic" operator="over" />
+              </filter>
+            </defs>
+            <polygon 
+              points="45,5 5,85 85,85" 
+              fill="transparent" 
+              stroke="#2563eb" 
+              strokeWidth="3"
+              filter="url(#blueGlow)"
+            />
+          </svg>
+        </div>
       </div>
       
       {/* Circle */}
       <div className="fixed left-1/2 top-[50%] transform -translate-x-1/2 z-10 flex flex-col items-center">
         <div
-          className="w-28 h-28 rounded-full"
           style={{
             opacity: circleVisibility,
             transform: `scale(${0.8 + scrollY * 0.001})`,
             transition: 'opacity 0.5s ease, transform 0.3s ease',
-            boxShadow: '0 0 15px #06b6d4, 0 0 30px #06b6d4',
-            border: '3px solid #06b6d4',
+            width: '80px',
+            height: '80px',
+            position: 'relative',
           }}
-        />
+        >
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <defs>
+              <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComposite in="SourceGraphic" operator="over" />
+              </filter>
+            </defs>
+            <circle 
+              cx="40" cy="40" 
+              r="35" 
+              fill="transparent" 
+              stroke="#06b6d4" 
+              strokeWidth="3" 
+              filter="url(#cyanGlow)" 
+            />
+          </svg>
+        </div>
       </div>
       
       {/* X Shape */}
@@ -128,31 +175,18 @@ export default function Home() {
             width: '80px',
             height: '80px',
             position: 'relative',
-            boxShadow: '0 0 15px #db2777, 0 0 30px #db2777',
           }}
         >
-          <div 
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '3px',
-              background: '#db2777',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(45deg)',
-              boxShadow: '0 0 8px #db2777',
-            }}
-          />
-          <div 
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '3px',
-              background: '#db2777',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(-45deg)',
-              boxShadow: '0 0 8px #db2777',
-            }}
-          />
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <defs>
+              <filter id="pinkGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feComposite in="SourceGraphic" operator="over" />
+              </filter>
+            </defs>
+            <line x1="10" y1="10" x2="70" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
+            <line x1="70" y1="10" x2="10" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
+          </svg>
         </div>
       </div>
       
