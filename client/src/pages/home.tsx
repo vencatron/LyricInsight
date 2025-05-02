@@ -62,13 +62,14 @@ export default function Home() {
       
       {/* Parallax Background */}
       <div 
-        className="fixed inset-0 w-full h-full z-0 opacity-20"
+        className="fixed inset-0 w-full h-full z-0 opacity-15"
         style={{
           backgroundImage: `url(${kendrickImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           transform: `translateY(${scrollY * 0.5}px)`,
           transition: 'transform 0.1s ease-out',
+          opacity: 0.12,
         }}
       />
       
@@ -76,11 +77,13 @@ export default function Home() {
       {/* Square */}
       <div className="fixed left-[20%] z-10 flex flex-col items-center">
         <div 
-          className="w-24 h-24 bg-purple-600 shadow-lg"
+          className="w-24 h-24 rounded-sm relative" 
           style={{
             opacity: squareVisibility,
             transform: `rotate(${scrollY * 0.1}deg)`,
             transition: 'opacity 0.5s ease, transform 0.3s ease',
+            boxShadow: '0 0 15px #d946ef, 0 0 30px #d946ef',
+            border: '3px solid #d946ef',
           }}
         />
         <p 
@@ -107,12 +110,12 @@ export default function Home() {
             opacity: triangleVisibility,
             transform: `rotate(${scrollY * -0.1}deg)`,
             transition: 'opacity 0.5s ease, transform 0.3s ease',
-            width: '0',
-            height: '0',
-            borderLeft: '50px solid transparent',
-            borderRight: '50px solid transparent',
-            borderBottom: '100px solid #4338ca',
-            filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))',
+            width: '90px',
+            height: '90px',
+            position: 'relative',
+            clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+            boxShadow: '0 0 15px #2563eb, 0 0 30px #2563eb',
+            border: '3px solid #2563eb',
           }}
         />
         <p 
@@ -135,11 +138,13 @@ export default function Home() {
       {/* Circle */}
       <div className="fixed left-[30%] z-10 flex flex-col items-center">
         <div
-          className="w-32 h-32 rounded-full bg-indigo-500 shadow-lg"
+          className="w-28 h-28 rounded-full"
           style={{
             opacity: circleVisibility,
             transform: `scale(${0.8 + scrollY * 0.001})`,
             transition: 'opacity 0.5s ease, transform 0.3s ease',
+            boxShadow: '0 0 15px #06b6d4, 0 0 30px #06b6d4',
+            border: '3px solid #06b6d4',
           }}
         />
         <p 
@@ -168,27 +173,29 @@ export default function Home() {
             width: '80px',
             height: '80px',
             position: 'relative',
-            filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))',
+            boxShadow: '0 0 15px #db2777, 0 0 30px #db2777',
           }}
         >
           <div 
             style={{
               position: 'absolute',
               width: '100%',
-              height: '10px',
-              background: '#ec4899',
+              height: '3px',
+              background: '#db2777',
               top: '50%',
               transform: 'translateY(-50%) rotate(45deg)',
+              boxShadow: '0 0 8px #db2777',
             }}
           />
           <div 
             style={{
               position: 'absolute',
               width: '100%',
-              height: '10px',
-              background: '#ec4899',
+              height: '3px',
+              background: '#db2777',
               top: '50%',
               transform: 'translateY(-50%) rotate(-45deg)',
+              boxShadow: '0 0 8px #db2777',
             }}
           />
         </div>
