@@ -49,7 +49,16 @@ export async function interpretLyric(lyric: string): Promise<LyricInterpretation
       response_format: { type: "json_object" }
     });
 
-    const result = JSON.parse(response.choices[0].message.content);
+    // Extract the content and handle possible null with a default
+    const content = response.choices[0].message.content;
+    if (!content) {
+      return {
+        lyric: lyric,
+        interpretation: "Unable to generate interpretation.",
+      };
+    }
+    
+    const result = JSON.parse(content);
     
     return {
       lyric: result.lyric || lyric,
