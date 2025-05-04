@@ -1,19 +1,29 @@
 /* Red, White, and Blue Theme for Kendrick Decoder */
 
+/* Define our consistent colors */
+:root {
+  --rwb-red: #dc2626;      /* red-600 as our primary red */
+  --rwb-red-dark: #b91c1c; /* red-700 for hover states */
+  --rwb-white: #f8fafc;    /* slate-50 as our white */
+  --rwb-blue: #2563eb;     /* blue-600 as our primary blue */
+  --rwb-blue-dark: #1d4ed8; /* blue-700 for hover states */
+  --rwb-blue-light: #dbeafe; /* blue-100 for highlights */
+}
+
 /* Override primary button to be red */
 button, 
 [type="submit"], 
 .btn-primary,
 .bg-primary {
-  background-color: #e11d48 !important; /* Red-600 */
-  color: white !important;
-  border: 1px solid #be123c !important;
+  background-color: var(--rwb-red) !important;
+  color: var(--rwb-white) !important;
+  border: 1px solid var(--rwb-red-dark) !important;
 }
 
 button:hover,
 [type="submit"]:hover, 
 .btn-primary:hover {
-  background-color: #be123c !important; /* Red-700 */
+  background-color: var(--rwb-red-dark) !important;
 }
 
 /* Accents and highlights in blue */
@@ -22,21 +32,21 @@ a,
 .link,
 .text-link,
 .btn-secondary {
-  color: #1e40af !important; /* Blue-800 */
+  color: var(--rwb-blue) !important;
 }
 
 a:hover,
 .link:hover,
 .text-link:hover {
-  color: #1e3a8a !important; /* Blue-900 */
+  color: var(--rwb-blue-dark) !important;
   text-decoration: underline;
 }
 
 /* White surfaces with borders */
 .card,
 .bg-white {
-  background-color: white !important;
-  border: 1px solid #e5e7eb !important; /* Gray-200 */
+  background-color: var(--rwb-white) !important;
+  border: 1px solid var(--rwb-blue-light) !important;
 }
 
 /* Subtle blue backgrounds */
@@ -48,25 +58,25 @@ body {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #1e40af !important;
-  outline: 2px solid #bfdbfe !important; /* Blue-200 */
+  border-color: var(--rwb-blue) !important;
+  outline: 2px solid var(--rwb-blue-light) !important;
 }
 
 /* Navbar and header styles */
 .navbar,
 .header {
-  background-color: #1e40af !important; /* Blue-800 */
-  color: white !important;
+  background-color: var(--rwb-blue) !important;
+  color: var(--rwb-white) !important;
 }
 
 /* Box shadows with blue tint */
 .shadow-blue {
-  box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.1), 0 2px 4px -1px rgba(30, 64, 175, 0.06) !important;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06) !important;
 }
 
 /* Red-white-blue gradient text */
 .rwb-gradient-text {
-  background: linear-gradient(to right, #e11d48, #f8fafc, #1e40af) !important;
+  background: linear-gradient(to right, var(--rwb-red), var(--rwb-white), var(--rwb-blue)) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   color: transparent !important;
@@ -75,6 +85,6 @@ select:focus {
 /* Thin red-white-blue horizontal divider */
 .rwb-divider {
   height: 3px;
-  background: linear-gradient(to right, #e11d48, #f8fafc, #1e40af) !important;
+  background: linear-gradient(to right, var(--rwb-red), var(--rwb-white), var(--rwb-blue)) !important;
   border-radius: 3px;
 }

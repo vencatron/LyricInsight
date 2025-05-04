@@ -50,7 +50,7 @@ export default function LyricForm({ onSubmit, isLoading }: LyricFormProps) {
             name="lyric"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel className="font-medium text-neutral-700">
+                <FormLabel className="font-medium" style={{ color: 'var(--rwb-blue-dark)' }}>
                   Enter a Kendrick Lamar lyric
                 </FormLabel>
                 <div className="relative">
@@ -62,7 +62,11 @@ export default function LyricForm({ onSubmit, isLoading }: LyricFormProps) {
                         field.onChange(e);
                         handleInputChange(e);
                       }}
-                      className="w-full px-4 py-6 border border-neutral-200 focus:border-primary"
+                      className="w-full px-4 py-6 border"
+                      style={{ 
+                        borderColor: 'var(--rwb-blue-light)', 
+                        backgroundColor: 'var(--rwb-white)'
+                      }}
                     />
                   </FormControl>
                   {showClearButton && (

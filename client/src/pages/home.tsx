@@ -97,7 +97,7 @@ export default function Home() {
               x="5" y="5" 
               width="70" height="70" 
               fill="transparent" 
-              stroke="#e11d48" 
+              stroke="var(--rwb-red)" 
               strokeWidth="3" 
               filter="url(#redGlow)" 
             />
@@ -127,7 +127,7 @@ export default function Home() {
             <polygon 
               points="45,5 5,85 85,85" 
               fill="transparent" 
-              stroke="#f8fafc" 
+              stroke="var(--rwb-white)" 
               strokeWidth="3"
               filter="url(#blueGlow)"
             />
@@ -158,7 +158,7 @@ export default function Home() {
               cx="40" cy="40" 
               r="35" 
               fill="transparent" 
-              stroke="#1e40af" 
+              stroke="var(--rwb-blue)" 
               strokeWidth="3" 
               filter="url(#blueGlow2)" 
             />
@@ -184,8 +184,8 @@ export default function Home() {
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
             </defs>
-            <line x1="10" y1="10" x2="70" y2="70" stroke="#e11d48" strokeWidth="3" filter="url(#redGlow2)" />
-            <line x1="70" y1="10" x2="10" y2="70" stroke="#e11d48" strokeWidth="3" filter="url(#redGlow2)" />
+            <line x1="10" y1="10" x2="70" y2="70" stroke="var(--rwb-red)" strokeWidth="3" filter="url(#redGlow2)" />
+            <line x1="70" y1="10" x2="10" y2="70" stroke="var(--rwb-red)" strokeWidth="3" filter="url(#redGlow2)" />
           </svg>
         </div>
       </div>
@@ -201,7 +201,7 @@ export default function Home() {
             transition: 'opacity 0.5s ease, transform 0.5s ease',
           }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-red-600 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: 'var(--rwb-red)' }}>
             Welcome to Kendrick Decoder
           </h2>
           <p className="text-gray-700 mb-8">
@@ -210,7 +210,7 @@ export default function Home() {
           <div className="w-16 h-1 rwb-divider mx-auto shadow-sm"/>
         </div>
         
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-blue-200 p-6 md:p-8 shadow-blue">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border-2 p-6 md:p-8 shadow-blue" style={{ borderColor: 'var(--rwb-blue-light)' }}>
           {/* Header Section */}
           <header className="text-center mb-8">
             <h1 className="font-bold text-3xl md:text-4xl mb-2 rwb-gradient-text">
