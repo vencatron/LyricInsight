@@ -213,7 +213,7 @@ export default function Home() {
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8">
           {/* Header Section */}
           <header className="text-center mb-8">
-            <h1 className="font-bold text-3xl md:text-4xl mb-2 bg-gradient-to-r from-purple-600 to-indigo-800 text-transparent bg-clip-text">
+            <h1 className="font-bold text-3xl md:text-4xl mb-2 bg-gradient-to-r from-orange-500 to-red-600 text-transparent bg-clip-text">
               Kendrick Decoder
             </h1>
             <p className="text-neutral-600 max-w-xl mx-auto">
