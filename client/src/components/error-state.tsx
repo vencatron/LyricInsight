@@ -10,8 +10,8 @@ interface ErrorStateProps {
 export default function ErrorState({ error, onTryAgain }: ErrorStateProps) {
   return (
     <section>
-      <Card className="overflow-hidden">
-        <div className="bg-red-600 px-6 py-4">
+      <Card className="overflow-hidden border-2 border-red-200 shadow-blue">
+        <div className="px-6 py-4" style={{ backgroundColor: '#e11d48' }}>
           <h2 className="font-semibold text-white text-lg">Error</h2>
         </div>
         
@@ -26,7 +26,7 @@ export default function ErrorState({ error, onTryAgain }: ErrorStateProps) {
           
           <Button 
             onClick={onTryAgain} 
-            className="mt-4 bg-red-600 hover:bg-red-700 text-white"
+            className="mt-4 btn-primary"
           >
             <span>Try Again</span>
             <RefreshCw className="w-5 h-5 ml-2" />

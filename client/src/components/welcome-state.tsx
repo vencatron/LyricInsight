@@ -4,7 +4,10 @@ import { Check, Music } from 'lucide-react';
 export default function WelcomeState() {
   return (
     <section>
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden border-2 border-blue-200 shadow-blue">
+        <div className="px-6 py-4" style={{ backgroundColor: '#1e40af' }}>
+          <h2 className="font-semibold text-white text-lg">How It Works</h2>
+        </div>
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
@@ -13,7 +16,6 @@ export default function WelcomeState() {
               </div>
             </div>
             <div>
-              <h2 className="font-semibold text-lg text-neutral-800 mb-2">How It Works</h2>
               <p className="text-neutral-600 mb-4">Enter a line from any Kendrick Lamar song, and our AI will analyze it to reveal:</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
