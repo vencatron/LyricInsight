@@ -3,9 +3,12 @@
 /* Define our consistent colors */
 :root {
   --rwb-red: #dc2626;      /* red-600 as our primary red */
+  --rwb-red-rgb: 220, 38, 38; /* RGB values for red-600 */
   --rwb-red-dark: #b91c1c; /* red-700 for hover states */
   --rwb-white: #f8fafc;    /* slate-50 as our white */
+  --rwb-white-rgb: 248, 250, 252; /* RGB values for slate-50 */
   --rwb-blue: #2563eb;     /* blue-600 as our primary blue */
+  --rwb-blue-rgb: 37, 99, 235; /* RGB values for blue-600 */
   --rwb-blue-dark: #1d4ed8; /* blue-700 for hover states */
   --rwb-blue-light: #dbeafe; /* blue-100 for highlights */
 }
