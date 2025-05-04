@@ -88,7 +88,7 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="orangeGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="purpleGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
@@ -97,9 +97,9 @@ export default function Home() {
               x="5" y="5" 
               width="70" height="70" 
               fill="transparent" 
-              stroke="#f97316" 
+              stroke="#d946ef" 
               strokeWidth="3" 
-              filter="url(#orangeGlow)" 
+              filter="url(#purpleGlow)" 
             />
           </svg>
         </div>
@@ -119,7 +119,7 @@ export default function Home() {
         >
           <svg width="90" height="90" viewBox="0 0 90 90">
             <defs>
-              <filter id="yellowGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="blueGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
@@ -127,9 +127,9 @@ export default function Home() {
             <polygon 
               points="45,5 5,85 85,85" 
               fill="transparent" 
-              stroke="#eab308" 
+              stroke="#2563eb" 
               strokeWidth="3"
-              filter="url(#yellowGlow)"
+              filter="url(#blueGlow)"
             />
           </svg>
         </div>
@@ -149,7 +149,7 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
@@ -158,9 +158,9 @@ export default function Home() {
               cx="40" cy="40" 
               r="35" 
               fill="transparent" 
-              stroke="#16a34a" 
+              stroke="#06b6d4" 
               strokeWidth="3" 
-              filter="url(#greenGlow)" 
+              filter="url(#cyanGlow)" 
             />
           </svg>
         </div>
@@ -179,13 +179,13 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="pinkGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
             </defs>
-            <line x1="10" y1="10" x2="70" y2="70" stroke="#dc2626" strokeWidth="3" filter="url(#redGlow)" />
-            <line x1="70" y1="10" x2="10" y2="70" stroke="#dc2626" strokeWidth="3" filter="url(#redGlow)" />
+            <line x1="10" y1="10" x2="70" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
+            <line x1="70" y1="10" x2="10" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
           </svg>
         </div>
       </div>
@@ -201,19 +201,19 @@ export default function Home() {
             transition: 'opacity 0.5s ease, transform 0.5s ease',
           }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-600 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-indigo-700 mb-4">
             Welcome to Kendrick Decoder
           </h2>
           <p className="text-gray-700 mb-8">
             Use the tool below to analyze the deeper meanings in his lyrics
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-orange-500 to-amber-600 mx-auto rounded-full"/>
+          <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-indigo-700 mx-auto rounded-full"/>
         </div>
         
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8">
           {/* Header Section */}
           <header className="text-center mb-8">
-            <h1 className="font-bold text-3xl md:text-4xl mb-2 bg-gradient-to-r from-orange-500 to-red-600 text-transparent bg-clip-text">
+            <h1 className="font-bold text-3xl md:text-4xl mb-2 bg-gradient-to-r from-purple-600 to-indigo-800 text-transparent bg-clip-text">
               Kendrick Decoder
             </h1>
             <p className="text-neutral-600 max-w-xl mx-auto">
