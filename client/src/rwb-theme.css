@@ -1,0 +1,15 @@
+/* Red, White, and Blue Theme for Kendrick Decoder */
+.btn-primary {
+  background-color: #e11d48 !important; /* Red-600 */
+  color: white !important;
+}
+
+.btn-primary:hover {
+  background-color: #be123c !important; /* Red-700 */
+}
+
+.navbar-bg {
+  background-color: #1e40af !important; /* Blue-800 */
+}
+
+/* Add more custom styles as needed */
