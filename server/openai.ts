@@ -12,12 +12,7 @@ export interface LyricInterpretationResponse {
 }
 
 // Store user-provided context for improving future responses
-export async function storeUserContext(context: { 
-  lyric: string; 
-  song: string; 
-  album: string;
-  trackType?: string;
-}): Promise<void> {
+export async function storeUserContext(context: { lyric: string; song: string; album: string }): Promise<void> {
   try {
     // Here we could store this in a database
     // For now, we'll just log it

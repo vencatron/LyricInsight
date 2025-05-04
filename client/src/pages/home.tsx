@@ -40,20 +40,6 @@ export default function Home() {
     setResults(null);
     lyricMutation.mutate(lyric);
   };
-  
-  const handleAlbumSubmit = async (album: string) => {
-    if (!results) return;
-    
-    try {
-      await apiRequest('POST', '/api/enrich-context', { 
-        lyric: results.lyric, 
-        song: results.song,
-        album 
-      });
-    } catch (error) {
-      console.error('Error submitting album context:', error);
-    }
-  };
 
   const handleTryAgain = () => {
     lyricMutation.reset();
@@ -248,7 +234,7 @@ export default function Home() {
             />
           )}
           
-          {results && !lyricMutation.isPending && <ResultsDisplay results={results} onAlbumSubmit={handleAlbumSubmit} />}
+          {results && !lyricMutation.isPending && <ResultsDisplay results={results} />}
           
           {!results && !lyricMutation.isPending && !lyricMutation.isError && <WelcomeState />}
 
@@ -262,6 +248,14 @@ export default function Home() {
     </div>
   );
 }
+import { useState } from 'react';
+import LyricForm from '@/components/lyric-form';
+import ResultsDisplay from '@/components/results-display';
+import LoadingState from '@/components/loading-state';
+import ErrorState from '@/components/error-state';
+import WelcomeState from '@/components/welcome-state';
+import { LyricInterpretation } from '@/lib/types';
+import { useMutation } from '@tanstack/react-query';
 
 export default function HomePage() {
   const [results, setResults] = useState<LyricInterpretation | null>(null);

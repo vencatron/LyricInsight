@@ -44,16 +44,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Lyric, song, and album information required" });
       }
 
-      // Store the context, indicating special track types
-      const trackType = album === 'Diss Track' || album === 'Feature' ? album : 'Album Track';
-      const context = {
-        lyric,
-        song,
-        album,
-        trackType
-      };
-
-      await storeUserContext(context);
+      await storeUserContext({ lyric, song, album });
       res.json({ success: true });
     } catch (error) {
       console.error("Error storing context:", error);
