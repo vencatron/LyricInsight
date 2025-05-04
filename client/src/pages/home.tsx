@@ -88,7 +88,7 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="purpleGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
@@ -97,9 +97,9 @@ export default function Home() {
               x="5" y="5" 
               width="70" height="70" 
               fill="transparent" 
-              stroke="#d946ef" 
+              stroke="#e11d48" 
               strokeWidth="3" 
-              filter="url(#purpleGlow)" 
+              filter="url(#redGlow)" 
             />
           </svg>
         </div>
@@ -127,7 +127,7 @@ export default function Home() {
             <polygon 
               points="45,5 5,85 85,85" 
               fill="transparent" 
-              stroke="#2563eb" 
+              stroke="#f8fafc" 
               strokeWidth="3"
               filter="url(#blueGlow)"
             />
@@ -149,7 +149,7 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="blueGlow2" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
@@ -158,9 +158,9 @@ export default function Home() {
               cx="40" cy="40" 
               r="35" 
               fill="transparent" 
-              stroke="#06b6d4" 
+              stroke="#1e40af" 
               strokeWidth="3" 
-              filter="url(#cyanGlow)" 
+              filter="url(#blueGlow2)" 
             />
           </svg>
         </div>
@@ -179,13 +179,13 @@ export default function Home() {
         >
           <svg width="80" height="80" viewBox="0 0 80 80">
             <defs>
-              <filter id="pinkGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <filter id="redGlow2" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
                 <feComposite in="SourceGraphic" operator="over" />
               </filter>
             </defs>
-            <line x1="10" y1="10" x2="70" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
-            <line x1="70" y1="10" x2="10" y2="70" stroke="#db2777" strokeWidth="3" filter="url(#pinkGlow)" />
+            <line x1="10" y1="10" x2="70" y2="70" stroke="#e11d48" strokeWidth="3" filter="url(#redGlow2)" />
+            <line x1="70" y1="10" x2="10" y2="70" stroke="#e11d48" strokeWidth="3" filter="url(#redGlow2)" />
           </svg>
         </div>
       </div>
