@@ -4,6 +4,8 @@ import { LyricInterpretation } from '@/lib/types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 interface ResultsDisplayProps {
   results: LyricInterpretation;
@@ -13,10 +15,14 @@ interface ResultsDisplayProps {
 export default function ResultsDisplay({ results, onAlbumSubmit }: ResultsDisplayProps) {
   const [albumInput, setAlbumInput] = useState('');
   const [albumSubmitted, setAlbumSubmitted] = useState(false);
+  const [trackType, setTrackType] = useState<'album' | 'diss' | 'feature'>('album');
   
   const handleAlbumSubmit = () => {
-    if (albumInput.trim() && onAlbumSubmit) {
+    if (trackType === 'album' && albumInput.trim() && onAlbumSubmit) {
       onAlbumSubmit(albumInput);
+      setAlbumSubmitted(true);
+    } else if (trackType !== 'album' && onAlbumSubmit) {
+      onAlbumSubmit(trackType === 'diss' ? 'Diss Track' : 'Feature');
       setAlbumSubmitted(true);
     }
   };
@@ -52,24 +58,45 @@ export default function ResultsDisplay({ results, onAlbumSubmit }: ResultsDispla
               ) : showAlbumInput ? (
                 <div className="mt-3 border p-3 rounded-md bg-neutral-50">
                   <p className="text-sm text-neutral-600 mb-2">
-                    Do you know which album this is from? Your input will help provide a more detailed interpretation.
+                    Help us provide a more detailed interpretation. What type of track is this?
                   </p>
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Enter album name"
-                      value={albumInput}
-                      onChange={(e) => setAlbumInput(e.target.value)}
-                      className="flex-1"
-                    />
-                    <Button 
-                      onClick={handleAlbumSubmit} 
-                      size="sm" 
-                      className="bg-primary hover:bg-primary/90"
-                    >
-                      <Send className="h-4 w-4 mr-1" />
-                      <span>Submit</span>
-                    </Button>
-                  </div>
+                  
+                  <RadioGroup value={trackType} onValueChange={(value) => setTrackType(value as 'album' | 'diss' | 'feature')} className="mb-3">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="album" id="album" />
+                      <Label htmlFor="album">Album Track</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="diss" id="diss" />
+                      <Label htmlFor="diss">Diss Track</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="feature" id="feature" />
+                      <Label htmlFor="feature">Feature</Label>
+                    </div>
+                  </RadioGroup>
+                  
+                  {trackType === 'album' && (
+                    <div className="mb-3">
+                      <Label htmlFor="albumName" className="text-sm mb-1 block">Which album is it from?</Label>
+                      <Input
+                        id="albumName"
+                        placeholder="Enter album name"
+                        value={albumInput}
+                        onChange={(e) => setAlbumInput(e.target.value)}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+                  
+                  <Button 
+                    onClick={handleAlbumSubmit} 
+                    size="sm" 
+                    className="bg-primary hover:bg-primary/90 w-full"
+                  >
+                    <Send className="h-4 w-4 mr-1" />
+                    <span>Submit</span>
+                  </Button>
                 </div>
               ) : null}
             </div>

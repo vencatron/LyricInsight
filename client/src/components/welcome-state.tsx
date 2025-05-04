@@ -68,7 +68,8 @@ export default function WelcomeState() {
           
           <p className="text-sm text-neutral-600">
             Tip: If you know which album a lyric is from but our system didn't identify it, 
-            you can provide that information to help us improve future interpretations.
+            you can provide that information. You can also specify if it's a diss track or feature
+            to help us improve future interpretations.
           </p>
         </CardContent>
       </Card>
