@@ -1,3 +1,6 @@
+/* Import Red, White, and Blue theme */
+@import './rwb-theme.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

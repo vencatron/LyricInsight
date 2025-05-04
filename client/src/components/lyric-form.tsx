@@ -85,7 +85,7 @@ export default function LyricForm({ onSubmit, isLoading }: LyricFormProps) {
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="bg-primary hover:bg-primary/90 text-white font-medium rounded-md px-5 py-2.5 flex items-center"
+              className="btn-primary font-medium rounded-md px-5 py-2.5 flex items-center"
             >
               <span>Decode Lyric</span>
               <Search className="w-5 h-5 ml-2" />

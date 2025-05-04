@@ -207,13 +207,13 @@ export default function Home() {
           <p className="text-gray-700 mb-8">
             Use the tool below to analyze the deeper meanings in his lyrics
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-red-500 via-white to-blue-600 mx-auto rounded-full shadow-sm"/>
+          <div className="w-16 h-1 rwb-divider mx-auto shadow-sm"/>
         </div>
         
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-blue-200 p-6 md:p-8">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border-2 border-blue-200 p-6 md:p-8 shadow-blue">
           {/* Header Section */}
           <header className="text-center mb-8">
-            <h1 className="font-bold text-3xl md:text-4xl mb-2 bg-gradient-to-r from-red-600 via-blue-500 to-blue-700 text-transparent bg-clip-text">
+            <h1 className="font-bold text-3xl md:text-4xl mb-2 rwb-gradient-text">
               Kendrick Decoder
             </h1>
             <p className="text-neutral-600 max-w-xl mx-auto">

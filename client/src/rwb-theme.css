@@ -1,15 +1,80 @@
 /* Red, White, and Blue Theme for Kendrick Decoder */
-.btn-primary {
+
+/* Override primary button to be red */
+button, 
+[type="submit"], 
+.btn-primary,
+.bg-primary {
   background-color: #e11d48 !important; /* Red-600 */
   color: white !important;
+  border: 1px solid #be123c !important;
 }
 
+button:hover,
+[type="submit"]:hover, 
 .btn-primary:hover {
   background-color: #be123c !important; /* Red-700 */
 }
 
-.navbar-bg {
-  background-color: #1e40af !important; /* Blue-800 */
+/* Accents and highlights in blue */
+.accent-blue,
+a,
+.link,
+.text-link,
+.btn-secondary {
+  color: #1e40af !important; /* Blue-800 */
 }
 
-/* Add more custom styles as needed */
+a:hover,
+.link:hover,
+.text-link:hover {
+  color: #1e3a8a !important; /* Blue-900 */
+  text-decoration: underline;
+}
+
+/* White surfaces with borders */
+.card,
+.bg-white {
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important; /* Gray-200 */
+}
+
+/* Subtle blue backgrounds */
+body {
+  background-color: #eff6ff !important; /* Blue-50 */
+}
+
+/* Input focus states */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #1e40af !important;
+  outline: 2px solid #bfdbfe !important; /* Blue-200 */
+}
+
+/* Navbar and header styles */
+.navbar,
+.header {
+  background-color: #1e40af !important; /* Blue-800 */
+  color: white !important;
+}
+
+/* Box shadows with blue tint */
+.shadow-blue {
+  box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.1), 0 2px 4px -1px rgba(30, 64, 175, 0.06) !important;
+}
+
+/* Red-white-blue gradient text */
+.rwb-gradient-text {
+  background: linear-gradient(to right, #e11d48, #f8fafc, #1e40af) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Thin red-white-blue horizontal divider */
+.rwb-divider {
+  height: 3px;
+  background: linear-gradient(to right, #e11d48, #f8fafc, #1e40af) !important;
+  border-radius: 3px;
+}
