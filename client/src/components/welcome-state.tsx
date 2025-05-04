@@ -40,3 +40,38 @@ export default function WelcomeState() {
     </section>
   );
 }
+import { Card, CardContent } from '@/components/ui/card';
+
+export default function WelcomeState() {
+  return (
+    <section>
+      <Card className="overflow-hidden">
+        <div className="bg-primary px-6 py-4">
+          <h2 className="font-semibold text-white text-lg">Welcome</h2>
+        </div>
+        
+        <CardContent className="p-6">
+          <p className="text-lg text-neutral-700 mb-4">
+            Enter a Kendrick Lamar lyric to get a detailed interpretation of its meaning, 
+            cultural context, and connections to other songs.
+          </p>
+          
+          <div className="my-4 p-4 bg-neutral-50 rounded-md border border-neutral-200">
+            <h3 className="font-medium text-neutral-800 mb-2">Example lyrics to try:</h3>
+            <ul className="space-y-2 text-neutral-700">
+              <li>"I remember you was conflicted, misusing your influence"</li>
+              <li>"All my life I has to fight"</li>
+              <li>"Sit down, be humble"</li>
+              <li>"The blacker the berry, the sweeter the juice"</li>
+            </ul>
+          </div>
+          
+          <p className="text-sm text-neutral-600">
+            Tip: If you know which album a lyric is from but our system didn't identify it, 
+            you can provide that information to help us improve future interpretations.
+          </p>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}

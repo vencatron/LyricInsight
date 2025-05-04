@@ -11,6 +11,21 @@ export interface LyricInterpretationResponse {
   year?: number;
 }
 
+// Store user-provided context for improving future responses
+export async function storeUserContext(context: { lyric: string; song: string; album: string }): Promise<void> {
+  try {
+    // Here we could store this in a database
+    // For now, we'll just log it
+    console.log("User provided additional context:", context);
+    
+    // This would be where you'd store the data in a production app
+    // Example: await db.insert(lyricContextTable).values({...context, createdAt: new Date().toISOString()});
+  } catch (error) {
+    console.error("Error storing user context:", error);
+    throw error;
+  }
+}
+
 export async function interpretLyric(lyric: string): Promise<LyricInterpretationResponse> {
   try {
     const response = await openai.chat.completions.create({
