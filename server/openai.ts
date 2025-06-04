@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { getContextForLyric } from "./interpretations";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -13,16 +14,17 @@ export interface LyricInterpretationResponse {
 
 export async function interpretLyric(lyric: string): Promise<LyricInterpretationResponse> {
   try {
+    const additionalContext = getContextForLyric(lyric);
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
         {
           role: "system",
-          content: 
+          content:
             "You are an expert on Kendrick Lamar's music, lyrics, and artistic style with precise knowledge of his discography. " +
             "Your task is to provide detailed interpretations of his lyrics, including analysis of wordplay, " +
             "double entendres, hidden meanings, cultural references, and connections to his personal life or other songs. " +
-            
+
             "Here is Kendrick Lamar's official discography for reference - use ONLY this information when attributing lyrics to albums:" +
             "- 'Section.80' (2011)" +
             "- 'good kid, m.A.A.d city' (2012)" +
@@ -31,19 +33,25 @@ export async function interpretLyric(lyric: string): Promise<LyricInterpretation
             "- 'DAMN.' (2017)" +
             "- 'Black Panther: The Album' (2018, soundtrack)" +
             "- 'Mr. Morale & the Big Steppers' (2022)" +
-            
+
+            "Kendrick frequently explores themes of racial inequality, life in Compton, spirituality, and personal growth. " +
+            "He often uses alter egos like 'K.Dot' and 'Kung Fu Kenny' and references characters such as Sherane, Lucy, and Uncle Sam. " +
+            "When possible, highlight these recurring themes, personas, or collaborators (e.g., Dr. Dre, Sounwave, Jay Rock) to deepen the analysis. " +
+
             "If you recognize the song, include the song title, album (ONLY from the list above), and year. " +
             "Format the interpretation as HTML with appropriate headings and paragraphs. " +
             "DO NOT make up or guess song attributions - if you are not 100% certain which song the lyric is from, " +
             "analyze the text without attributing it to a specific song or album. " +
             "It's better to omit song/album information than to provide incorrect information. " +
-            
+
             "Provide your response in JSON format with the following fields: " +
             "lyric (the original lyric), interpretation (HTML formatted analysis), song (optional), album (optional), year (optional number)."
         },
         {
           role: "user",
-          content: lyric
+          content: additionalContext
+            ? `${lyric}\n\nContext: ${additionalContext}`
+            : lyric
         }
       ],
       response_format: { type: "json_object" }
