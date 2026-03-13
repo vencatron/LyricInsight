@@ -1,82 +1,161 @@
 import OpenAI from "openai";
+import { z } from "zod";
+import type {
+  LyricInterpretation,
+  LyricSource,
+  LyricToken,
+  WordInsight,
+} from "@shared/lyric-analysis";
 import { getContextForLyric } from "./interpretations";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export interface LyricInterpretationResponse {
-  lyric: string;
-  interpretation: string;
-  song?: string;
-  album?: string;
-  year?: number;
-}
+const interpretationCache = new Map<string, LyricInterpretation>();
 
-export async function interpretLyric(lyric: string): Promise<LyricInterpretationResponse> {
+const modelResponseSchema = z.object({
+  overview: z.string().min(1),
+  themes: z.array(z.string()).default([]),
+  song: z.string().min(1).optional(),
+  album: z.string().min(1).optional(),
+  year: z.number().int().optional(),
+  wordInsights: z
+    .array(
+      z.object({
+        tokenIndex: z.number().int().nonnegative(),
+        meaning: z.string().min(1),
+        relevance: z.string().min(1),
+        sourceIds: z.array(z.string()).default([]),
+      }),
+    )
+    .default([]),
+});
+
+export async function interpretLyric(lyric: string): Promise<LyricInterpretation> {
+  const cacheKey = lyric.trim().toLowerCase();
+  const cached = interpretationCache.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   try {
-    const additionalContext = getContextForLyric(lyric);
+    const tokens = tokenizeLyric(lyric);
+    const wordTokens = tokens.filter((token) => token.kind === "word");
+    const sources = getContextForLyric(lyric);
+    const promptContext = buildPromptContext(lyric, wordTokens, sources);
+
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
+      temperature: 0.2,
       messages: [
         {
           role: "system",
           content:
-            "You are an expert on Kendrick Lamar's music, lyrics, and artistic style with precise knowledge of his discography. " +
-            "Your task is to provide detailed interpretations of his lyrics, including analysis of wordplay, " +
-            "double entendres, hidden meanings, cultural references, and connections to his personal life or other songs. " +
-
-            "Here is Kendrick Lamar's official discography for reference - use ONLY this information when attributing lyrics to albums:" +
-            "- 'Section.80' (2011)" +
-            "- 'good kid, m.A.A.d city' (2012)" +
-            "- 'To Pimp a Butterfly' (2015)" +
-            "- 'untitled unmastered.' (2016)" +
-            "- 'DAMN.' (2017)" +
-            "- 'Black Panther: The Album' (2018, soundtrack)" +
-            "- 'Mr. Morale & the Big Steppers' (2022)" +
-
-            "Kendrick frequently explores themes of racial inequality, life in Compton, spirituality, and personal growth. " +
-            "He often uses alter egos like 'K.Dot' and 'Kung Fu Kenny' and references characters such as Sherane, Lucy, and Uncle Sam. " +
-            "When possible, highlight these recurring themes, personas, or collaborators (e.g., Dr. Dre, Sounwave, Jay Rock) to deepen the analysis. " +
-
-            "If you recognize the song, include the song title, album (ONLY from the list above), and year. " +
-            "Format the interpretation as HTML with appropriate headings and paragraphs. " +
-            "DO NOT make up or guess song attributions - if you are not 100% certain which song the lyric is from, " +
-            "analyze the text without attributing it to a specific song or album. " +
-            "It's better to omit song/album information than to provide incorrect information. " +
-
-            "Provide your response in JSON format with the following fields: " +
-            "lyric (the original lyric), interpretation (HTML formatted analysis), song (optional), album (optional), year (optional number)."
+            "You are a world-class expert on Kendrick Lamar's music, writing, and symbolism. " +
+            "Interpret the lyric carefully, avoid unsupported claims, and stay concise but specific. " +
+            "Analyze each provided word token in context, especially slang, repeated images, commands, names, and loaded nouns. " +
+            "Only cite source IDs that appear in the provided context. If none apply, return an empty sourceIds array. " +
+            "Use the supplied discography source for album attribution and never invent albums outside that list. " +
+            "If you are not confident about the song, album, or year, omit those fields instead of guessing. " +
+            "Return strict JSON with: overview, themes, optional song, optional album, optional year, and wordInsights. " +
+            "Each wordInsights item must include tokenIndex, meaning, relevance, and sourceIds.",
         },
         {
           role: "user",
-          content: additionalContext
-            ? `${lyric}\n\nContext: ${additionalContext}`
-            : lyric
-        }
+          content: promptContext,
+        },
       ],
-      response_format: { type: "json_object" }
+      response_format: { type: "json_object" },
     });
 
-    // Extract the content and handle possible null with a default
     const content = response.choices[0].message.content;
     if (!content) {
-      return {
-        lyric: lyric,
-        interpretation: "Unable to generate interpretation.",
-      };
+      throw new Error("Model returned no content.");
     }
-    
-    const result = JSON.parse(content);
-    
-    return {
-      lyric: result.lyric || lyric,
-      interpretation: result.interpretation || "Unable to generate interpretation.",
-      song: result.song,
-      album: result.album,
-      year: result.year
+
+    const parsed = modelResponseSchema.parse(JSON.parse(content));
+    const result: LyricInterpretation = {
+      lyric,
+      overview: parsed.overview,
+      themes: parsed.themes,
+      tokens,
+      wordInsights: sanitizeWordInsights(parsed.wordInsights, tokens, sources),
+      sources,
+      song: parsed.song,
+      album: parsed.album,
+      year: parsed.year,
     };
+
+    interpretationCache.set(cacheKey, result);
+    return result;
   } catch (error) {
     console.error("Error interpreting lyric:", error);
     throw new Error("Failed to interpret lyric. Please try again later.");
   }
+}
+
+function tokenizeLyric(lyric: string): LyricToken[] {
+  const matches = lyric.match(/[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)*|[^\sA-Za-z0-9]/g) ?? [];
+
+  return matches.map((text, index) => ({
+    index,
+    text,
+    normalized: normalizeToken(text),
+    kind: /[A-Za-z0-9]/.test(text) ? "word" : "punctuation",
+  }));
+}
+
+function normalizeToken(token: string): string {
+  return token.toLowerCase().replace(/[^a-z0-9']/g, "");
+}
+
+function buildPromptContext(
+  lyric: string,
+  wordTokens: LyricToken[],
+  sources: LyricSource[],
+): string {
+  const tokenList = wordTokens
+    .map((token) => `${token.index}: ${token.text}`)
+    .join("\n");
+
+  const sourceList = sources
+    .map((source) => `${source.id} | ${source.type} | ${source.title} | ${source.excerpt}`)
+    .join("\n");
+
+  return [
+    `Lyric: ${lyric}`,
+    "",
+    "Word tokens to analyze:",
+    tokenList,
+    "",
+    "Available sources:",
+    sourceList,
+    "",
+    "Requirements:",
+    "- Write one overview paragraph.",
+    "- Return 2 to 4 concise themes.",
+    "- Analyze every word token listed above.",
+    "- Keep each meaning and relevance field to 1 sentence each.",
+  ].join("\n");
+}
+
+function sanitizeWordInsights(
+  wordInsights: WordInsight[],
+  tokens: LyricToken[],
+  sources: LyricSource[],
+): WordInsight[] {
+  const validTokenIndexes = new Set(
+    tokens.filter((token) => token.kind === "word").map((token) => token.index),
+  );
+  const validSourceIds = new Set(sources.map((source) => source.id));
+
+  return wordInsights
+    .filter((insight) => validTokenIndexes.has(insight.tokenIndex))
+    .map((insight) => ({
+      tokenIndex: insight.tokenIndex,
+      meaning: insight.meaning.trim(),
+      relevance: insight.relevance.trim(),
+      sourceIds: insight.sourceIds.filter((sourceId) => validSourceIds.has(sourceId)),
+    }))
+    .sort((left, right) => left.tokenIndex - right.tokenIndex);
 }

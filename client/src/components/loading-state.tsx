@@ -13,7 +13,7 @@ export default function LoadingState() {
             <div className="loader ease-linear rounded-full border-4 border-blue-200 h-12 w-12" style={{ borderTopColor: '#e11d48' }}></div>
           </div>
           <div className="text-center text-neutral-600">
-            <p>Breaking down the lyrics, finding connections, and unveiling the meaning...</p>
+            <p>Breaking the line into word-level notes, themes, and grounded context...</p>
           </div>
           
           {/* Loading placeholders */}

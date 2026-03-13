@@ -1,7 +1,6 @@
-export interface LyricInterpretation {
-  lyric: string;
-  interpretation: string;
-  song?: string;
-  album?: string;
-  year?: number;
-}
+export type {
+  LyricInterpretation,
+  LyricSource,
+  LyricToken,
+  WordInsight,
+} from "@shared/lyric-analysis";
